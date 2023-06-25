@@ -39,7 +39,7 @@ jobs:
           name: terraform-plan
           retention-days: 3
           path: |
-            plan.tfplan
+            ${{ inputs.workspace }}/plan.tfplan
 
   apply:
     needs: plan
@@ -62,7 +62,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: terraform-plan
-          path: plan.tfplan
+          path: ${{ inputs.workspace }}/plan.tfplan
       
       - name: Apply 🛠️
         env:
