@@ -2,5 +2,8 @@ name: Test1
 on: [push]
 jobs:
     test1:
-        uses:
-            ./.github/workflows/terraform.yml
+        uses: ./.github/workflows/terraform.yml
+        with:
+            workspace: infrastructure/test1
+        secrets:
+            GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
