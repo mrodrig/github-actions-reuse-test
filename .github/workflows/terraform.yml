@@ -20,10 +20,11 @@ jobs:
         with:
           credentials_json: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
 
-      - name: 'Set up Google Cloud SDK 🔧'
-        uses: 'google-github-actions/setup-gcloud@v1'
-
-      - uses: hashicorp/setup-terraform@v1
+      - name: Setup Google Cloud SDK 🔧
+        uses: google-github-actions/setup-gcloud@v1
+  
+      - name: Setup Terraform 🔧
+        uses: hashicorp/setup-terraform@v1
       
       - name: Plan 📄
         env:
@@ -47,15 +48,15 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
 
-      - name: 'Setup Google Cloud Auth 🔐'
-        uses: 'google-github-actions/auth@v1'
+      - name: Setup Google Cloud Auth 🔐
+        uses: google-github-actions/auth@v1
         with:
           credentials_json: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
 
-      - name: 'Setup Google Cloud SDK 🔧'
-        uses: 'google-github-actions/setup-gcloud@v1'
+      - name: Setup Google Cloud SDK 🔧
+        uses: google-github-actions/setup-gcloud@v1
 
-      - name: 'Setup Terraform '
+      - name: Setup Terraform 🔧
         uses: hashicorp/setup-terraform@v1
 
       - name: Download Plan 🛎️
@@ -69,4 +70,7 @@ jobs:
           PLAN_FILE: plan.tfplan
         run: |
           cd ${{ inputs.workspace }}
+          pwd
+          ls -la
+          cat $PLAN_FILE
           terraform apply $PLAN_FILE
