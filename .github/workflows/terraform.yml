@@ -27,7 +27,7 @@ jobs:
       
       - name: Plan 📄
         env:
-          PLAN_FILE: ${{ inputs.workspace }}/plan.tfplan
+          PLAN_FILE: plan.tfplan
         run: |
           echo "PLAN_FILE=$PLAN_FILE" >> $GITHUB_ENV
           cd ${{ inputs.workspace }}
