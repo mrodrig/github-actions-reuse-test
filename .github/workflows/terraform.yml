@@ -23,11 +23,12 @@ jobs:
       - name: 'Set up Google Cloud SDK 🔧'
         uses: 'google-github-actions/setup-gcloud@v1'
 
-      - name: 'Terraform Plan 🔎'
-        uses: hashicorp/terraform-plan@v1
-        with:
-          working-directory: ${{ inputs.workspace }}
-          plan: true
+      - uses: hashicorp/setup-terraform@v1
+      
+      - name: Plan 📄
+        run: |
+          cd ${{ inputs.workspace }}
+          terraform plan
 
   apply:
     needs: plan
@@ -44,8 +45,9 @@ jobs:
       - name: 'Set up Google Cloud SDK 🔧'
         uses: 'google-github-actions/setup-gcloud@v1'
 
-      - name: 'Terraform Apply 🛠️'
-        uses: hashicorp/terraform-apply@v1
-        with:
-          working-directory: ${{ inputs.workspace }}
-          apply: true
+      - uses: hashicorp/setup-terraform@v1
+      
+      - name: Apply 🛠️
+        run: |
+          cd ${{ inputs.workspace }}
+          terraform apply
