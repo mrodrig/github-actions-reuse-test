@@ -38,8 +38,7 @@ jobs:
         with:
           name: terraform-plan
           retention-days: 3
-          path: |
-            ${{ inputs.workspace }}/plan.tfplan
+          path: ${{ inputs.workspace }}/plan.tfplan
 
   apply:
     needs: plan
@@ -53,10 +52,11 @@ jobs:
         with:
           credentials_json: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
 
-      - name: 'Set up Google Cloud SDK 🔧'
+      - name: 'Setup Google Cloud SDK 🔧'
         uses: 'google-github-actions/setup-gcloud@v1'
 
-      - uses: hashicorp/setup-terraform@v1
+      - name: 'Setup Terraform '
+        uses: hashicorp/setup-terraform@v1
 
       - name: Download Plan 🛎️
         uses: actions/download-artifact@v3
