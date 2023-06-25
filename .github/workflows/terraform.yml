@@ -63,14 +63,11 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: terraform-plan
-          path: ${{ inputs.workspace }}/plan.tfplan
+          path: ${{ inputs.workspace }}
       
       - name: Apply 🛠️
         env:
           PLAN_FILE: plan.tfplan
         run: |
           cd ${{ inputs.workspace }}
-          pwd
-          ls -la
-          ls -la $PLAN_FILE
           terraform apply $PLAN_FILE
