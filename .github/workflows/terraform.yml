@@ -1,0 +1,43 @@
+name: Terraform Jobs Template
+on: []
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: 'Setup Google Cloud Auth 🔐'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
+
+      - name: 'Set up Google Cloud SDK 🔧'
+        uses: 'google-github-actions/setup-gcloud@v1'
+
+      - name: 'Terraform Plan 🔎'
+        uses: hashicorp/terraform-plan@v1
+        with:
+          working-directory: .
+          plan: true
+
+  apply:
+    needs: plan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: 'Setup Google Cloud Auth 🔐'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
+
+      - name: 'Set up Google Cloud SDK 🔧'
+        uses: 'google-github-actions/setup-gcloud@v1'
+
+      - name: 'Terraform Apply 🛠️'
+        uses: hashicorp/terraform-apply@v1
+        with:
+          working-directory: .
+          apply: true
