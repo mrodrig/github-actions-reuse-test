@@ -26,9 +26,20 @@ jobs:
       - uses: hashicorp/setup-terraform@v1
       
       - name: Plan 📄
+        env:
+          PLAN_FILE: plan.tfplan
         run: |
+          echo "PLAN_FILE=$PLAN_FILE" >> $GITHUB_ENV
           cd ${{ inputs.workspace }}
-          terraform plan
+          terraform plan -out $PLAN_FILE
+
+      - name: Upload Plan 💾
+        uses: actions/upload-artifact@v3
+        with:
+          name: terraform-plan
+          retention-days: 3
+          path: |
+            $PLAN_FILE
 
   apply:
     needs: plan
@@ -46,8 +57,16 @@ jobs:
         uses: 'google-github-actions/setup-gcloud@v1'
 
       - uses: hashicorp/setup-terraform@v1
+
+      - name: Download Plan 🛎️
+        uses: actions/download-artifact@v3
+        with:
+          name: terraform-plan
+          path: plan.tfplan
       
       - name: Apply 🛠️
+        env:
+          PLAN_FILE: plan.tfplan
         run: |
           cd ${{ inputs.workspace }}
-          terraform apply
+          terraform apply $PLAN_FILE
