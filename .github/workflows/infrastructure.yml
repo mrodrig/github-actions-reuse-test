@@ -1,0 +1,6 @@
+name: Test1
+on: [push]
+jobs:
+    test1:
+        uses:
+            ./.github/workflows/terraform.yml
