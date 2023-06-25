@@ -72,5 +72,5 @@ jobs:
           cd ${{ inputs.workspace }}
           pwd
           ls -la
-          cat $PLAN_FILE
+          ls -la $PLAN_FILE
           terraform apply $PLAN_FILE
