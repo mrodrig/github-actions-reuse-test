@@ -39,7 +39,7 @@ jobs:
           name: terraform-plan
           retention-days: 3
           path: |
-            $PLAN_FILE
+            plan.tfplan
 
   apply:
     needs: plan
