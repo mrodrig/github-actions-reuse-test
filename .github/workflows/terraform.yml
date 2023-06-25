@@ -66,7 +66,7 @@ jobs:
       
       - name: Apply 🛠️
         env:
-          PLAN_FILE: ${{ inputs.workspace }}/plan.tfplan
+          PLAN_FILE: plan.tfplan
         run: |
           cd ${{ inputs.workspace }}
           terraform apply $PLAN_FILE
