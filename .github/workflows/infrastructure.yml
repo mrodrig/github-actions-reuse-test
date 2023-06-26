@@ -1,9 +1,14 @@
-name: Test1
+name: Infrastructure
 on: [push]
 jobs:
-    test1:
+    infrastructure:
+        strategy:
+            matrix:
+              workspace:
+                - test1
+        name: infrastructure/${{ matrix.workspace }}
         uses: ./.github/workflows/terraform.yml
         with:
-            workspace: infrastructure/test1
+            workspace: infrastructure/${{ matrix.workspace }}
         secrets:
             GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
