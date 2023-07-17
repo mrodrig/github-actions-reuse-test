@@ -34,6 +34,7 @@ jobs:
           cd ${{ inputs.workspace }}
           terraform init
           terraform plan -out $PLAN_FILE
+          sha1sum $PLAN_FILE
 
       - name: Upload Plan 💾
         uses: actions/upload-artifact@v3
@@ -71,4 +72,5 @@ jobs:
           PLAN_FILE: plan.tfplan
         run: |
           cd ${{ inputs.workspace }}
+          sha1sum $PLAN_FILE
           terraform apply $PLAN_FILE
