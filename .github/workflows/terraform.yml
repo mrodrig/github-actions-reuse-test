@@ -30,7 +30,9 @@ jobs:
         env:
           PLAN_FILE: plan.tfplan
         run: |
+          export WORKSPACE_ID=$(echo ${{ inputs.workspace }} | sed "s/\//-/g")
           echo "PLAN_FILE=$PLAN_FILE" >> $GITHUB_ENV
+          echo "WORKSPACE_ID=$WORKSPACE_ID" >> $GITHUB_ENV
           cd ${{ inputs.workspace }}
           terraform init
           terraform plan -out $PLAN_FILE
@@ -39,7 +41,7 @@ jobs:
       - name: Upload Plan 💾
         uses: actions/upload-artifact@v3
         with:
-          name: terraform-plan-${{ inputs.workspace }}
+          name: ${{ env.WORKSPACE_ID }}-terraform-plan
           retention-days: 3
           path: ${{ inputs.workspace }}/plan.tfplan
 
@@ -64,7 +66,7 @@ jobs:
       - name: Download Plan 🛎️
         uses: actions/download-artifact@v3
         with:
-          name: terraform-plan-${{ inputs.workspace }}
+          name: ${{ env.WORKSPACE_ID }}-terraform-plan
           path: ${{ inputs.workspace }}
       
       - name: Apply 🛠️
