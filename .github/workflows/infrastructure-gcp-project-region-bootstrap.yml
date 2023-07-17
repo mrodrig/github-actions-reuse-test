@@ -1,4 +1,4 @@
-name: Infrastructure
+name: Project-Region Bootstrap
 on: [push]
 jobs:
     infrastructure:

@@ -1,4 +1,4 @@
-name: Infrastructure
+name: Project-Region Feature
 on: [push]
 jobs:
     infrastructure:
