@@ -5,7 +5,7 @@ env:
 jobs:
     infrastructure:
         name: infrastructure/${{ github.env.project }}
-        uses: ./.github/workflows/templates/terraform.yml
+        uses: ./.github/workflows/terraform.yml
         with:
             workspace: infrastructure/${{ github.env.project }}
         secrets:
