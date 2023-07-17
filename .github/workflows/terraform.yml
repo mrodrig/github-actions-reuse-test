@@ -33,6 +33,7 @@ jobs:
           export WORKSPACE_ID=$(echo ${{ inputs.workspace }} | sed "s/\//-/g")
           echo "PLAN_FILE=$PLAN_FILE" >> $GITHUB_ENV
           echo "WORKSPACE_ID=$WORKSPACE_ID" >> $GITHUB_ENV
+          cat $GITHUB_ENV
           cd ${{ inputs.workspace }}
           terraform init
           terraform plan -out $PLAN_FILE
