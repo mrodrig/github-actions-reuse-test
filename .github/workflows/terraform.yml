@@ -30,10 +30,6 @@ jobs:
         env:
           PLAN_FILE: plan.tfplan
         run: |
-          export WORKSPACE_ID=$(echo ${{ inputs.workspace }} | sed "s/\//-/g")
-          echo "PLAN_FILE=$PLAN_FILE" >> $GITHUB_ENV
-          echo "WORKSPACE_ID=$WORKSPACE_ID" >> $GITHUB_ENV
-          cat $GITHUB_ENV
           cd ${{ inputs.workspace }}
           terraform init
           terraform plan -out $PLAN_FILE
@@ -74,7 +70,6 @@ jobs:
         env:
           PLAN_FILE: plan.tfplan
         run: |
-          cat $GITHUB_ENV
           cd ${{ inputs.workspace }}
           sha1sum $PLAN_FILE
           terraform apply $PLAN_FILE
