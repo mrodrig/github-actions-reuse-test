@@ -42,7 +42,7 @@ jobs:
       - name: Upload Plan 💾
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.WORKSPACE_ID }}-terraform-plan
+          name: terraform-plan
           retention-days: 3
           path: ${{ inputs.workspace }}/plan.tfplan
 
@@ -67,13 +67,14 @@ jobs:
       - name: Download Plan 🛎️
         uses: actions/download-artifact@v3
         with:
-          name: ${{ env.WORKSPACE_ID }}-terraform-plan
+          name: terraform-plan
           path: ${{ inputs.workspace }}
       
       - name: Apply 🛠️
         env:
           PLAN_FILE: plan.tfplan
         run: |
+          cat $GITHUB_ENV
           cd ${{ inputs.workspace }}
           sha1sum $PLAN_FILE
           terraform apply $PLAN_FILE
