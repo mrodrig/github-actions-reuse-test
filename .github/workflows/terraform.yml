@@ -39,7 +39,7 @@ jobs:
       - name: Upload Plan 💾
         uses: actions/upload-artifact@v3
         with:
-          name: terraform-plan
+          name: terraform-plan-${{ inputs.workspace }}
           retention-days: 3
           path: ${{ inputs.workspace }}/plan.tfplan
 
@@ -64,7 +64,7 @@ jobs:
       - name: Download Plan 🛎️
         uses: actions/download-artifact@v3
         with:
-          name: terraform-plan
+          name: terraform-plan-${{ inputs.workspace }}
           path: ${{ inputs.workspace }}
       
       - name: Apply 🛠️
