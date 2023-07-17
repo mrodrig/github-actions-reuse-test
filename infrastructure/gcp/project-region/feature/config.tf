@@ -1,5 +1,5 @@
 locals {
-  env_name = "Development"
+  env_name = file("../.config/env")
 }
 
 terraform {

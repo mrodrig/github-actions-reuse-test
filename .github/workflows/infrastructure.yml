@@ -5,7 +5,8 @@ jobs:
         strategy:
             matrix:
               workspace:
-                - test1
+                - gcp/project-region/bootstrap
+                - gcp/project-region/feature
         name: infrastructure/${{ matrix.workspace }}
         uses: ./.github/workflows/terraform.yml
         with:
